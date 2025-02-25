@@ -93,7 +93,7 @@ class SignInScreen extends StatelessWidget {
                   Expanded(
                     child: CustomElevatedButton.text(
                       onPressed: () {
-                        Navigator.pushNamed(context, RoutesName.signUp);
+                        print("object");
                       },
                       text: "Login",
                       buttonColor: AppColors.whiteColor,
@@ -105,9 +105,14 @@ class SignInScreen extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              Text(
-                "Don’t have an account? Create Account",
-                style: AppStyles.W500White18,
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, RoutesName.signUp);
+                },
+                child: Text(
+                  "Don’t have an account? Create Account",
+                  style: AppStyles.W500White18,
+                ),
               )
             ],
           ),
