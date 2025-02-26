@@ -30,6 +30,7 @@ class SignUpScreen extends StatelessWidget {
         } else if (state is SignUpSuccessState) {
           EasyLoading.dismiss();
           SnackBarServices.showSuccessMessage("Account Created Successfully");
+          Navigator.pushReplacementNamed(context, RoutesName.signIn);
         }
       },
       child: Scaffold(

@@ -8,6 +8,7 @@ abstract class AuthRemoteDataSource{
       String email,
       String password,
       String rePassword,
+      String mobileNumber,
       );
 
 }

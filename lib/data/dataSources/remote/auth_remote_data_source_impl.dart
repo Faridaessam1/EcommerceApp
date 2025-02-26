@@ -17,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<Either<Failures, SignUpResponseDataModel>> createAccount(
-      String name, String email, String password, String rePassword) async {
+      String name, String email, String password, String rePassword , String mobileNumber) async {
     try{
 
       SignUpRequestDataModel signUpRequestDataModel = SignUpRequestDataModel(
@@ -25,6 +25,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: email,
         password: password,
         rePassword: rePassword,
+        phone: mobileNumber,
+
       );
 
       var response = await apiNetwork.postData(
