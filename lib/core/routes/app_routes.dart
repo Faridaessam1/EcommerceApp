@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/core/routes/routes_name.dart';
 import 'package:e_commerce_app/ui/auth/signIN/sign_in_screen.dart';
+import 'package:e_commerce_app/ui/home/home_layout_view.dart';
 import 'package:e_commerce_app/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,11 @@ class AppRoutes{
           builder: (context) =>SignUpScreen(),
           settings: settings,
         );
-
+      case RoutesName.home:
+        return MaterialPageRoute(
+          builder: (context) =>const HomeLayoutView(),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => SplashScreen() ,
