@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/core/errors/failures.dart';
 import 'package:e_commerce_app/domain/useCases/sign_up_use_case.dart';
 import 'package:e_commerce_app/ui/auth/SignUp/cubit/sign_up_states.dart';
 import 'package:flutter/cupertino.dart';
