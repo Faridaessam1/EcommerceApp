@@ -17,6 +17,12 @@ abstract class AppStyles{
     fontSize: 16,
 
   );
+  static TextStyle W400Blue14 = GoogleFonts.poppins(
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+
+  );
   static TextStyle W300White18 = GoogleFonts.poppins(
     color: AppColors.grayColor,
     fontWeight: FontWeight.w300,

@@ -57,7 +57,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       decoration: InputDecoration(
         filled: true,
         fillColor: widget.filledColor,
-        prefixIcon: widget.hasIcon && widget.iconPath != null
+        prefixIcon: widget.hasIcon && widget.iconPath  != null
             ? Padding(
           padding: const EdgeInsets.all(9.0),
           child: ImageIcon(

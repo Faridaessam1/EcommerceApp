@@ -1,76 +1,63 @@
-import 'package:e_commerce_app/ui/home/categories_tab.dart';
-import 'package:e_commerce_app/ui/home/home_tab.dart';
-import 'package:e_commerce_app/ui/home/profile_tab.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_commerce_app/ui/home/cubit/home_screen_states.dart';
+import 'package:e_commerce_app/ui/home/cubit/home_screen_view_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constants/app_colors.dart';
-import 'favorite_tab.dart';
 
-class HomeLayoutView extends StatefulWidget {
-  const HomeLayoutView({super.key});
+class HomeLayoutView extends StatelessWidget {
+        HomeLayoutView({super.key});
 
-  @override
-  State<HomeLayoutView> createState() => _LayoutViewState();
-}
+    HomeScreenViewModel viewModel = HomeScreenViewModel();
 
-class _LayoutViewState extends State<HomeLayoutView> {
-  int selectedIndex = 0 ;
-  List<Widget> tabs = [
-    HomeTab(),
-    CategoriesTab(),
-    FavoriteTab(),
-    ProfileTab(),
-
-  ];
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+  return BlocBuilder<HomeScreenViewModel , HomeScreenState>(
+      bloc: viewModel,
+      builder: (BuildContext context, state) {
+        return Scaffold(
+          backgroundColor: AppColors.whiteColor,
+          bottomNavigationBar: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
+            child: BottomNavigationBar(
+              selectedItemColor: AppColors.whiteColor ,
+              unselectedItemColor: AppColors.whiteColor,
+              backgroundColor: AppColors.primaryColor,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: viewModel.selectedIndex,
+              onTap: viewModel.onBottomNavBarItemTapped,
+              items:  const [
 
-        backgroundColor: AppColors.whiteColor,
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  activeIcon:Icon(Icons.home) ,
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.category_outlined),
+                  activeIcon:Icon(Icons.category) ,
+                  label: "",
+                ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppColors.whiteColor ,
-        unselectedItemColor: AppColors.whiteColor,
-        backgroundColor: AppColors.primaryColor,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: selectedIndex,
-        onTap: onBottomNavBarItemTapped,
-        items:  const [
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon:Icon(Icons.home) ,
-            label: "Home",
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border_outlined),
+                  activeIcon:Icon(Icons.favorite) ,
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person_3_outlined),
+                  activeIcon:Icon(Icons.person) ,
+                  label: "",
+                ),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category_outlined),
-            activeIcon:Icon(Icons.category) ,
-            label: "Categories",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_outlined),
-            activeIcon:Icon(Icons.favorite) ,
-            label: "Favorite",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_3_outlined),
-            activeIcon:Icon(Icons.person) ,
-            label: "Profile",
-          ),
-        ],
-      ),
-      body: tabs[selectedIndex],
-
+          body: viewModel.tabs[viewModel.selectedIndex],
+        );
+      },
     );
   }
-
-  void onBottomNavBarItemTapped(int index){
-    selectedIndex = index;
-    setState(() {
-
-    });
   }
-}

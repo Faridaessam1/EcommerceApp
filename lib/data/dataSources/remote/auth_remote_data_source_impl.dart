@@ -1,11 +1,9 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/api/api_network.dart';
 import 'package:e_commerce_app/core/api/end_points.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
 import 'package:e_commerce_app/data/model/signUp/Sign_Up_Request_Data_Model.dart';
 import 'package:e_commerce_app/data/model/signIn/sign_in_request.dart';
-import 'package:e_commerce_app/domain/entities/sign_Up_Response_Entity.dart';
 import 'package:e_commerce_app/domain/entities/sign_in_response_entity.dart';
 import 'package:e_commerce_app/domain/repositories/dataSource/remote_interFace/auth_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
