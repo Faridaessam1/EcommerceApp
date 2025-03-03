@@ -29,6 +29,7 @@ class SignInScreen extends StatelessWidget {
         } else if (state is SignInSuccessState) {
           EasyLoading.dismiss();
           SnackBarServices.showSuccessMessage("Logged In Successfully");
+          Navigator.pushNamedAndRemoveUntil(context,RoutesName.home, (route) => false,);
         }
       },
       child: Scaffold(
