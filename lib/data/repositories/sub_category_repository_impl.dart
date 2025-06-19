@@ -3,10 +3,12 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
 
 import 'package:e_commerce_app/domain/entities/subCategoryResponseEntity.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/repositories/Subcategory/sub_category_interface.dart';
 import '../../domain/repositories/dataSource/remote_interFace/sub_category_data_source_interface.dart';
 
+@Injectable(as: SubcategoriesRepositoryInterface)
 class SubcategoriesRepositoryImpl implements SubcategoriesRepositoryInterface {
   SubcategoriesRemoteDataSource subcategoriesRemoteDataSource;
   SubcategoriesRepositoryImpl({required this.subcategoriesRemoteDataSource});

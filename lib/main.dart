@@ -9,15 +9,19 @@ import 'core/routes/app_routes.dart';
 import 'core/utils/loading_services.dart';
 import 'core/utils/my_bloc_observer.dart';
 
-
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
-  configureDependencies();
+void main()  {
+  // تأكد من تهيئة Flutter bindings قبل أي async operations
+  WidgetsFlutterBinding.ensureInitialized();
+
+  configureDependencies(); // ← دي أهم خطوة
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
+
+  // تهيئة Loading configuration قبل runApp
   ConfigLoading();
 
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,12 +30,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'E-Commerce App', // أضفت title للـ app
+      debugShowCheckedModeBanner: false, // إخفاء debug banner
       initialRoute: RoutesName.home,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       navigatorKey: navigatorKey,
-      builder: EasyLoading.init(
-        builder: BotToastInit(),
-      ),
+      // ترتيب صحيح للـ builders
+      builder: (context, child) {
+        // تهيئة EasyLoading أولاً
+        child = EasyLoading.init()(context, child);
+        // ثم تهيئة BotToast
+        child = BotToastInit()(context, child);
+        return child;
+      },
     );
   }
 }

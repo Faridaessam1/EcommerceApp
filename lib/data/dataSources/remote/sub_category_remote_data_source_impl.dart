@@ -3,12 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
 
 import 'package:e_commerce_app/domain/entities/subCategoryResponseEntity.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_network.dart';
 import '../../../core/api/end_points.dart';
 import '../../../domain/repositories/dataSource/remote_interFace/sub_category_data_source_interface.dart';
 import '../../model/subCategories/sub_category_response_data_model.dart';
-
+@Injectable(as: SubcategoriesRemoteDataSource)
 class SubcategoriesRemoteDataSourceImpl implements SubcategoriesRemoteDataSource{
   ApiNetwork apiNetwork;
   SubcategoriesRemoteDataSourceImpl({required this.apiNetwork});
