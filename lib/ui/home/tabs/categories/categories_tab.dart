@@ -234,13 +234,27 @@ class _CategoriesTabState extends State<CategoriesTab> {
                     var subCategories = state.subCategoryResponseEntity.data;
                     print("SubCategories loaded: ${subCategories?.length}"); // Debug
 
+                    // Handle empty subcategories list
+                    if (subCategories == null || subCategories.isEmpty) {
+                      return Container(
+                        color: AppColors.whiteColor,
+                        child: Center(
+                          child: Text(
+                            "No subcategories found",
+                            style: AppStyles.W400Blue14,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    }
+
                     return Container(
                       color: AppColors.whiteColor,
                       child: ListView.builder(
-                        itemCount: subCategories?.length ?? 0,
+                        itemCount: subCategories.length,
                         itemBuilder: (context, index) {
                           bool isSelected = selectedSubCategoryIndex == index;
-                          var subCategory = subCategories![index];
+                          var subCategory = subCategories[index];
 
                           return GestureDetector(
                             onTap: () {
@@ -293,7 +307,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
 
                   // Default state - show message to select category
                   return Container(
-                    color: AppColors.babyBlue.withOpacity(0.3),
+                    color: AppColors.whiteColor,
                     child: Center(
                       child: Text(
                         "Select a category\nto view subcategories",

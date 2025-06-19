@@ -33,4 +33,6 @@ class SubCategoryErrorState extends HomeTabStates {
   Failures failures;
   SubCategoryErrorState({required this.failures});
 }
+class SubCategoryEmptyState extends HomeTabStates {
+}
 
