@@ -34,7 +34,7 @@ abstract class Validations {
     return null;
   }
 
-  static String? ValidateUserName(String? userName){
+  static String? validateUserName(String? userName){
     RegExp userNameRegExp = RegExp(r'^[a-zA-Z0-9,.-]+$');
 
     if(userName == null || userName.isEmpty){
@@ -45,14 +45,14 @@ abstract class Validations {
     return null;
   }
 
-  static String? ValidateFullName(String? fullName){
+  static String? validateFullName(String? fullName){
     if(fullName == null || fullName.isEmpty){
       return "Required";
     }
     return null;
   }
 
-  static String? ValidatePhoneNumber(String? number){
+  static String? validatePhoneNumber(String? number){
     if(number == null || number.isEmpty){
       return "Required";
     }else if(int.tryParse(number.trim()) == null){
