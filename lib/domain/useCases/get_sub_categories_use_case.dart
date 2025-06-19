@@ -11,10 +11,16 @@ class GetSubcategoriesUseCase {
   GetSubcategoriesUseCase(this.repository);
 
   Future<Either<Failures, SubCategoryResponseEntity>> call({
-    required String categoryId,
+    String? categoryId, // Made optional
     int? page,
     int? limit,
   }) async {
-    return await repository.getSubcategories(page: page, limit: limit);
+    if (categoryId != null) {
+      // Get subcategories by category
+      return await repository.getSubcategoriesByCategory(categoryId, page: page, limit: limit);
+    } else {
+      // Get all subcategories
+      return await repository.getSubcategories(page: page, limit: limit);
+    }
   }
 }
