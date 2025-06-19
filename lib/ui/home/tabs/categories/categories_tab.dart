@@ -4,6 +4,7 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_styles.dart';
 import '../../../../core/di/di.dart';
+import '../../../../core/routes/routes_name.dart';
 import '../home/cubit/home_tab_states.dart';
 import '../home/cubit/home_tab_view_model.dart';
 
@@ -258,16 +259,45 @@ class _CategoriesTabState extends State<CategoriesTab> {
 
                           return GestureDetector(
                             onTap: () {
-                              print("SubCategory selected: ${subCategory.name}"); // Debug
-                              setState(() {
-                                selectedSubCategoryIndex = index;
-                              });
+                              try {
+                                print("SubCategory selected: ${subCategory.name}"); // Debug
+                                setState(() {
+                                  selectedSubCategoryIndex = index;
+                                });
 
-                              // Load products for selected subcategory
-                              String? subCategoryId = subCategory.id;
-                              if (subCategoryId != null) {
-                                print("Loading products for subcategory: $subCategoryId"); // Debug
-                                // viewModel.getProductsBySubCategory(subCategoryId);
+                                // Load products for selected subcategory
+                                String? subCategoryId = subCategory.id;
+                                String? subCategoryName = subCategory.name;
+
+                                print("SubCategory ID: $subCategoryId"); // Debug
+                                print("SubCategory Name: $subCategoryName"); // Debug
+
+                                if (subCategoryId != null && subCategoryId.isNotEmpty) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RoutesName.products,
+                                    arguments: {
+                                      'subcategoryId': subCategoryId,
+                                      'subcategoryName': subCategoryName ?? 'Unknown',
+                                    },
+                                  );
+                                } else {
+                                  print("SubCategory ID is null or empty");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Invalid subcategory selected"),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                print("Error navigating to products: $e");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Something went wrong: $e"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
                               }
                             },
                             child: Container(

@@ -4,6 +4,7 @@ import 'package:e_commerce_app/ui/home/home_layout_view.dart';
 import 'package:e_commerce_app/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/Products/products_view.dart';
 import '../../ui/auth/SignUp/sign_up_screen.dart';
 
 class AppRoutes{
@@ -28,6 +29,11 @@ class AppRoutes{
       case RoutesName.home:
         return MaterialPageRoute(
           builder: (context) => HomeLayoutView(),
+          settings: settings,
+        );
+      case RoutesName.products:
+        return MaterialPageRoute(
+          builder: (context) => const ProductsPage(),
           settings: settings,
         );
       default:
