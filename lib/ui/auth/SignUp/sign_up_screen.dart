@@ -55,7 +55,7 @@ class SignUpScreen extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTextFormField(
-                    validator: Validations.ValidateFullName,
+                    validator: Validations.validateFullName,
                     controller: signUpViewModel.fullNameController,
                     hintText: "Enter Your Full Name",
                     hintTextColor: AppColors.grayColor,
@@ -77,7 +77,7 @@ class SignUpScreen extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTextFormField(
-                    validator: Validations.ValidatePhoneNumber,
+                    validator: Validations.validatePhoneNumber,
                     controller: signUpViewModel.mobileNumberController,
                     hintText: "Enter Your Mobile Number",
                     hintTextColor: AppColors.grayColor,

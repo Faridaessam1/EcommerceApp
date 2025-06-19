@@ -56,7 +56,7 @@ class ProfileTab extends StatelessWidget{
                       height: 20,
                     ),
                     CustomTextFormField(
-                      validator: Validations.ValidateFullName,
+                      validator: Validations.validateFullName,
                       controller: signUpViewModel.fullNameController,
                       hintText: signUpViewModel.fullNameController.text,
                       hintTextColor: AppColors.primaryColor,
@@ -125,7 +125,7 @@ class ProfileTab extends StatelessWidget{
                       height: 20,
                     ),
                     CustomTextFormField(
-                      validator: Validations.ValidatePhoneNumber,
+                      validator: Validations.validatePhoneNumber,
                       controller: signUpViewModel.mobileNumberController,
                       hintText: signUpViewModel.mobileNumberController.text,
                       hintTextColor: AppColors.primaryColor,
