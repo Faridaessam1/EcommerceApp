@@ -5,7 +5,6 @@ import 'package:e_commerce_app/core/errors/failures.dart';
 import 'package:e_commerce_app/domain/entities/ProductsResponseEntity.dart';
 import 'package:e_commerce_app/data/model/products/ProductsResponseDM.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../domain/repositories/dataSource/remote_interFace/products_remote_data_source.dart';
 
 @Injectable(as: ProductsRemoteDataSource)
@@ -31,8 +30,12 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
       }
 
       var response = await apiNetwork.getData(
-        endPoint: '${EndPoints.productsEndPoint}/subcategory/$subcategoryId',
-        queryParameters: queryParams.isNotEmpty ? queryParams : null,
+        endPoint: EndPoints.productsEndPoint,
+        queryParameters: {
+          'subcategory': subcategoryId,
+          if (page != null) 'page': page.toString(),
+          if (limit != null) 'limit': limit.toString(),
+        },
       );
 
       final productsResponse = ProductsResponseDM.fromJson(response.data);
@@ -87,7 +90,7 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
 
         return Right(entity);
       } else {
-        return Left(ServerError(errorMsg: 'Failed to get products'));
+        return Left(ServerError(errorMsg: 'Failed to get products: Status ${response.statusCode}'));
       }
     } catch (error) {
       return Left(Failures(errorMsg: error.toString()));
