@@ -3,6 +3,7 @@ import 'package:e_commerce_app/ui/Products/widgets/product_grid_item.dart';
 import 'package:e_commerce_app/ui/Products/widgets/product_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/di/di.dart';
 import '../ProductDetails/product_details_view.dart';
 import 'cubit/products_cubit.dart';
@@ -154,6 +155,52 @@ class _ProductsViewState extends State<ProductsView> {
             return ProductErrorWidget(
               errorMessage: state.errorMsg,
               onRetry: () => cubit.refreshProducts(),
+            );
+          }
+
+          // Show "No products found" message when there are no products
+          if ((state is ProductSuccessState || state is ProductLoadMoreSuccessState) &&
+              cubit.allProducts.isEmpty) {
+            return RefreshIndicator(
+              onRefresh: () async => cubit.refreshProducts(),
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Container(
+                  height: MediaQuery.of(context).size.height - 200,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.shopping_bag_outlined,
+                          size: 80,
+                          color: Colors.grey[400],
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No Products Found',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'There are no products available\nin this category at the moment.',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                            height: 1.4,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             );
           }
 
