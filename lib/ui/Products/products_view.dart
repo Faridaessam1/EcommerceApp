@@ -3,8 +3,8 @@ import 'package:e_commerce_app/ui/Products/widgets/product_grid_item.dart';
 import 'package:e_commerce_app/ui/Products/widgets/product_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/di/di.dart';
+import '../ProductDetails/product_details_view.dart';
 import 'cubit/products_cubit.dart';
 import 'cubit/products_states.dart';
 
@@ -176,10 +176,25 @@ class _ProductsViewState extends State<ProductsView> {
                         return ProductGridItem(
                           product: cubit.allProducts[index],
                           onTap: () {
-                            // TODO: Navigate to product details
+                            // Navigate to product details
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetailsPage(
+                                  product: cubit.allProducts[index],
+                                ),
+                              ),
+                            );
                           },
                           onFavoritePressed: () {
                             // TODO: Handle favorite
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Added to favorites'),
+                                duration: Duration(seconds: 1),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
                           },
                         );
                       },
