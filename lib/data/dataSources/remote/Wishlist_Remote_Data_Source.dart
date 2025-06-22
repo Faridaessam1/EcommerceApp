@@ -5,6 +5,7 @@ import 'package:e_commerce_app/core/api/end_points.dart';
 import 'package:e_commerce_app/data/model/wishlist/wishlist_response_data_model.dart';
 import 'package:e_commerce_app/domain/repositories/dataSource/remote_interFace/wishlist_remote_data_source_interface.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/errors/failures.dart';
 import '../../../domain/entities/wishlist_response_entity.dart';
@@ -99,10 +100,20 @@ class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSourceInterFace 
       return Left(ServerError(errorMsg: 'An unexpected error occurred'));
     }
   }
-
   Future<String> _getToken() async {
-    // Replace this with your actual token retrieval logic
-    // You might want to use SharedPreferences, Secure Storage, or another method
-    return '';
+    final prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('auth_token') ?? '';
+
+    if (token.isEmpty) {
+      print('Warning: No token found! User might need to login again.');
+    }
+
+    return token;
+  }
+
+  Future<bool> _hasValidToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('auth_token');
+    return token != null && token.isNotEmpty;
   }
 }
