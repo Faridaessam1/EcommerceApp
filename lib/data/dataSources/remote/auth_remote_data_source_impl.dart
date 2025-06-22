@@ -7,6 +7,7 @@ import 'package:e_commerce_app/data/model/signIn/sign_in_request.dart';
 import 'package:e_commerce_app/domain/entities/sign_in_response_entity.dart';
 import 'package:e_commerce_app/domain/repositories/dataSource/remote_interFace/auth_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/signIn/sign_in_response_data_model.dart';
 import '../../model/signUp/SignUP_Response_Data_Model.dart';
@@ -77,6 +78,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
 
 
+  }
+
+  static Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('auth_token', token);
+  }
+
+  static Future<String> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('auth_token') ?? '';
   }
 }
 
