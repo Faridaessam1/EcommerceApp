@@ -24,6 +24,18 @@ class CategoryResponseDataModel extends CategoryResponseEntity {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'statusMsg': statusMsg,
+      'message': message,
+      'results': results,
+      'metadata': (metadata as MetadataDataModel?)?.toJson(),
+      'data': categoryData
+          ?.map((e) => (e as CategoryDataDataModel).toJson())
+          .toList(),
+    };
+  }
+
 
 
 }
@@ -46,6 +58,16 @@ class CategoryDataDataModel extends CategoryDataEntity{
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'slug': slug,
+      'image': image,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+    };
+  }
 
 
 }
@@ -62,5 +84,11 @@ class MetadataDataModel extends MetadataEntity{
     numberOfPages = json['numberOfPages'];
     limit = json['limit'];
   }
-
+  Map<String, dynamic> toJson() {
+    return {
+      'currentPage': currentPage,
+      'numberOfPages': numberOfPages,
+      'limit': limit,
+    };
+  }
 }

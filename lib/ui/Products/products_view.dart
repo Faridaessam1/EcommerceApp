@@ -14,20 +14,19 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // استقبال الـ arguments من Navigator
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
     if (args == null) {
       return Scaffold(
-        appBar: AppBar(title: Text('Error')),
+        appBar: AppBar(title: const Text('Error')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('No arguments provided'),
+              const Text('No arguments provided'),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Go Back'),
+                child: const Text('Go Back'),
               ),
             ],
           ),
@@ -40,17 +39,17 @@ class ProductsPage extends StatelessWidget {
 
     if (subcategoryId == null || subcategoryName == null) {
       return Scaffold(
-        appBar: AppBar(title: Text('Error')),
+        appBar: AppBar(title: const Text('Error')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Invalid arguments provided'),
+              const Text('Invalid arguments provided'),
               Text('SubcategoryId: $subcategoryId'),
               Text('SubcategoryName: $subcategoryName'),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Go Back'),
+                child: const Text('Go Back'),
               ),
             ],
           ),
@@ -89,11 +88,6 @@ class _ProductsViewState extends State<ProductsView> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-
-    // Debug prints
-    print("ProductsView initialized");
-    print("SubcategoryId: ${widget.subcategoryId}");
-    print("SubcategoryName: ${widget.subcategoryName}");
   }
 
   void _onScroll() {
@@ -128,20 +122,6 @@ class _ProductsViewState extends State<ProductsView> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {
-              // TODO: Implement search
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
-            onPressed: () {
-              // TODO: Navigate to cart
-            },
-          ),
-        ],
       ),
       body: BlocBuilder<ProductCubit, ProductStates>(
         builder: (context, state) {

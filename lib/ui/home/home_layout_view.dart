@@ -34,23 +34,23 @@ class HomeLayoutView extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined),
                   activeIcon:Icon(Icons.home) ,
-                  label: "",
+                  label: "Home",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.category_outlined),
                   activeIcon:Icon(Icons.category) ,
-                  label: "",
+                  label: "Categories",
                 ),
 
                 BottomNavigationBarItem(
                   icon: Icon(Icons.favorite_border_outlined),
                   activeIcon:Icon(Icons.favorite) ,
-                  label: "",
+                  label: "Favorite",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person_3_outlined),
                   activeIcon:Icon(Icons.person) ,
-                  label: "",
+                  label: "Profile",
                 ),
               ],
             ),

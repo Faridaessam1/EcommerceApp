@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../core/utils/snack_bar_services.dart';
 import '../../../domain/entities/ProductsResponseEntity.dart';
 import '../cubit/product_view_model.dart';
 
@@ -131,14 +132,19 @@ class ProductGridItem extends StatelessWidget {
                           style: const TextStyle(fontSize: 12),
                         ),
                         const Spacer(),
-                        Container(
-                          width: 28,
-                          height: 28,
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            shape: BoxShape.circle,
+                        GestureDetector(
+                          onTap: (){
+                            SnackBarServices.showSuccessMessage(' Item added to cart');
+                          },
+                          child: Container(
+                            width: 28,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.add, color: Colors.white, size: 18),
                           ),
-                          child: const Icon(Icons.add, color: Colors.white, size: 18),
                         ),
                       ],
                     ),

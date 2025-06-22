@@ -174,7 +174,17 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, RoutesName.signIn);
+                    },
+                    child: Text(
+                      "Already have an account? Login",
+                      style: AppStyles.W500White18,
+                    ),
                   )
+
                 ],
               ),
             ),
