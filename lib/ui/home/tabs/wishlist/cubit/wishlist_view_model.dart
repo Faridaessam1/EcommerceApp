@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../domain/entities/wishlist_response_entity.dart';
-import '../../../domain/useCases/wishlist_use_case.dart';
+import '../../../../../domain/entities/wishlist_response_entity.dart';
+import '../../../../../domain/useCases/wishlist_use_case.dart';
 import 'wishlist_states.dart';
 
 @injectable
@@ -52,11 +51,14 @@ class WishlistCubit extends Cubit<WishlistStates> {
         emit(AddToWishlistErrorState(errorMsg: error.errorMsg));
       },
           (response) {
-        wishlistProductIds.add(productId);
-        emit(AddToWishlistSuccessState(wishlistResponse: response));
-        // Refresh wishlist to get updated data
-        getWishlist();
-      },
+            wishlistItems = response.data ?? [];
+          wishlistProductIds = wishlistItems
+              .where((item) => item.sId != null)
+              .map((item) => item.sId!)
+              .toSet();
+
+          emit(AddToWishlistSuccessState(wishlistResponse: response));
+          },
     );
   }
 
