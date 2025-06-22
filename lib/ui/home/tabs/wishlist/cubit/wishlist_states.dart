@@ -1,5 +1,5 @@
 
-import '../../../domain/entities/wishlist_response_entity.dart';
+import '../../../../../domain/entities/wishlist_response_entity.dart';
 
 abstract class WishlistStates {}
 
