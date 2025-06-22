@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/utils/snack_bar_services.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../domain/entities/ProductsResponseEntity.dart';
@@ -39,12 +40,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 icon: const Icon(Icons.favorite_border, color: Colors.black),
                 onPressed: () {
                   // TODO: Handle favorite
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.black),
-                onPressed: () {
-                  // TODO: Handle share
                 },
               ),
             ],
@@ -295,12 +290,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: OutlinedButton(
                 onPressed: ProductViewModel.isProductInStock(widget.product) ? () {
                   // TODO: Add to cart
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Added $quantity items to cart'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  SnackBarServices.showSuccessMessage('Added $quantity items to cart');
                 } : null,
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -324,12 +314,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: ElevatedButton(
                 onPressed: ProductViewModel.isProductInStock(widget.product) ? () {
                   // TODO: Buy now
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Proceeding to checkout...'),
-                      backgroundColor: Colors.blue,
-                    ),
-                  );
+                  SnackBarServices.showSuccessMessage('Proceeding to checkout...');
+
                 } : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

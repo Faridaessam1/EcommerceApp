@@ -30,16 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'E-Commerce App', // أضفت title للـ app
-      debugShowCheckedModeBanner: false, // إخفاء debug banner
+      title: 'E-Commerce App',
+      debugShowCheckedModeBanner: false,
       initialRoute: RoutesName.home,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       navigatorKey: navigatorKey,
-      // ترتيب صحيح للـ builders
       builder: (context, child) {
-        // تهيئة EasyLoading أولاً
         child = EasyLoading.init()(context, child);
-        // ثم تهيئة BotToast
         child = BotToastInit()(context, child);
         return child;
       },
